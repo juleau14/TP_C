@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+
+
+
+int main(int argc, char const *argv[]) {
+
+switch(pid = fork()) {
+  case -1:
+    perror("Erreur creation fils");
+    exit(1);
+  case 0:
+    afficher_infos();
+    exit(0);
+  default:
+    wait(NULL);
+    exit(0);
+  }
+  return 0;
+}
+
+
+
+void afficher_infos() {
+  pid_t pid = getpid();
+  pid_t ppid = getppid();
+  pid_t gpig = getpgrp();
+  uid upid = getuid();
+  gid_t numgrp = getgid();
+
+  printf("Pid = %d\n", pid);
+  printf("Pid père = %d\n", ppid);
+  printf("Pid groupe = %d\n", gpig);
+  printf("Numéro utilisateur = %d\n", upid);
+  printf("Numéro groupe utilisateur = %d\n", numgrp);
+}
